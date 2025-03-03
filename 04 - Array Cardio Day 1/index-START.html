@@ -38,28 +38,62 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const bornIn1500 = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year <= 1599));
+    console.table(bornIn1500);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const firstAndLast = inventors.map((inventor) => `${inventor.first} ${inventor.last}`);
+    console.log(firstAndLast);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const birthSort = inventors.sort((b, a) => b.year > a.year);
+    console.table(birthSort);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const livedYears = inventors.reduce((total, inventor) => total + (inventor.passed - inventor.year), 0);
+    console.log(livedYears);
 
     // 5. Sort the inventors by years lived
+    const yearsLived = inventors.sort(function(a, b) {
+      const lastGuy = a.passed - a.year;
+      const nextGuy = b.passed - b.year;
+      return lastGuy > nextGuy ? -1 : 1;
+    });
+    console.table(yearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
 
+
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const lastName = people.sort((lastOne, nextOne) => {
+    const [aLast, aFirst] = lastOne.split(', ');
+    const [bLast, bFirst] = nextOne.split(', ');
+    return aLast > bLast ? 1 : -1;
+  });
+  console.table(lastName);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    //we will use reduce to iterate over the array
+    const transportation = data.reduce(function(obj, item) {
+      //then, we need to check if the object already have that item, if not, it will create it if the 0 count
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      //and then it will add 1 to the counter
+      obj[item]++;
+      return obj;
+      //we need to put the items in a object, we could hardcode every item of the array, but if you dont know each one of them, you can start with an empty object and the if loop will verify and create each on of them that needs to be created
+    }, {});
+
+    console.log(transportation);
 
   </script>
 </body>
